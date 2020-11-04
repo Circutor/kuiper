@@ -62,6 +62,11 @@ build_without_edgex: build_prepare
 pkg_without_edgex: build_without_edgex
 	@make real_pkg
 
+.PHONY: arm
+arm:
+	GO111MODULE=on GOOS=linux GOARCH=arm CGO_ENABLED=0 go build -ldflags="-s -w -X main.Version="1.1.1" -X main.LoadFileType=relative" -o kuiperd xstream/server/main.go;
+	@echo "Build arm successfully"
+
 .PHONY: build_with_edgex
 build_with_edgex: build_prepare
 	@if [ ! -z $(GOOS) ] && [ ! -z $(GOARCH) ] && [ $(CGO_ENABLED) == 0 ];then \
