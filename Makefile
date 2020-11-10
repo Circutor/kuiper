@@ -64,8 +64,8 @@ pkg_without_edgex: build_without_edgex
 
 .PHONY: arm
 arm:
-	GO111MODULE=on GOOS=linux GOARCH=arm CGO_ENABLED=0 go build -ldflags="-s -w -X main.Version="1.1.1" -X main.LoadFileType=relative" -o kuiper  xstream/cli/main.go;
-	GO111MODULE=on GOOS=linux GOARCH=arm CGO_ENABLED=0 go build -ldflags="-s -w -X main.Version="1.1.1" -X main.LoadFileType=relative" -o kuiperd xstream/server/main.go;
+	GO111MODULE=on GOOS=linux GOARCH=arm CGO_ENABLED=0 go build -ldflags="-s -w -X main.Version="1.1.0" -X main.LoadFileType=relative" -o kuiper  xstream/cli/main.go;
+	GO111MODULE=on GOOS=linux GOARCH=arm CGO_ENABLED=0 go build -ldflags="-s -w -X main.Version="1.1.0" -X main.LoadFileType=relative" -o kuiperd xstream/server/main.go;
 	@echo "Build arm successfully"
 
 .PHONY: build_with_edgex
