@@ -63,6 +63,10 @@ func (es *EdgexSource) Open(ctx api.StreamContext, consumer chan<- api.SourceTup
 		for {
 			msg, err := es.client.Recv()
 			if err != nil {
+				if !es.subscribed {
+					log.Infof("Successfully closed edgex subscription.")
+					return
+				}
 				log.Warnf("Error while receiving edgex events: %v", err)
 			} else {
 				for _, str := range msg.Frames {
@@ -145,6 +149,7 @@ func (es *EdgexSource) getValue(r models.Reading, logger api.Logger) (interface{
 
 func (es *EdgexSource) Close(ctx api.StreamContext) error {
 	if es.subscribed {
+		es.subscribed = false
 		if e := es.client.Close(); e != nil {
 			return e
 		}
