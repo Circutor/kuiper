@@ -140,7 +140,8 @@ func (es *EdgexSource) getValue(r models.Reading, logger api.Logger) (interface{
 
 	if value, err := strconv.ParseBool(v); err == nil {
 		logger.Debugf("name %s with type bool is %v", r.Name, value)
-		return value, nil
+		// As SQL can't compare bool correctly, we send it back in string format
+		return v, nil
 	}
 
 	logger.Debugf("name %s with type string is %v", r.Name, v)
