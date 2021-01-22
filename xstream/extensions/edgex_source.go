@@ -140,7 +140,7 @@ func (es *EdgexSource) getValue(r models.Reading, logger api.Logger) (interface{
 
 	if value, err := strconv.ParseBool(v); err == nil {
 		logger.Debugf("name %s with type bool is %v", r.Name, value)
-		return r, nil
+		return value, nil
 	}
 
 	logger.Debugf("name %s with type string is %v", r.Name, v)
